@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 9 Physics</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      color:white;
+      background:
+        linear-gradient(rgba(0,40,10,0.72),rgba(0,15,5,0.92)),
+        url("soccer.jpg");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,255,127,0.12), transparent 18%),
+        radial-gradient(circle at 80% 30%, rgba(0,255,180,0.08), transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(100,255,180,0.08), transparent 25%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .floating-orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(8px);
+      opacity:0.35;
+      z-index:0;
+      animation:floatOrb 10s ease-in-out infinite;
+    }
+
+    .orb1{
+      width:120px;
+      height:120px;
+      background:#00ff7f;
+      top:120px;
+      left:40px;
+    }
+
+    .orb2{
+      width:180px;
+      height:180px;
+      background:#00cc66;
+      bottom:100px;
+      right:60px;
+      animation-delay:2s;
+    }
+
+    .orb3{
+      width:90px;
+      height:90px;
+      background:#66ffb3;
+      top:380px;
+      right:220px;
+      animation-delay:4s;
+    }
+
+    @keyframes floatOrb{
+      0%{ transform:translateY(0px) translateX(0px); }
+      50%{ transform:translateY(-25px) translateX(10px); }
+      100%{ transform:translateY(0px) translateX(0px); }
+    }
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:85px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 50px;
+      background:rgba(0,0,0,0.45);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.12);
+      z-index:1000;
+    }
+
+    .logo-container{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-img{
+      height:58px;
+      width:auto;
+    }
+
+    .logo-text{
+      font-size:24px;
+      font-weight:700;
+      color:#00ff7f;
+      text-shadow:0 0 15px rgba(0,255,127,0.45);
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#00ff7f;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0%;
+      height:2px;
+      background:#00ff7f;
+      transition:0.35s;
+      box-shadow:0 0 12px #00ff7f;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .hero{
+      text-align:center;
+      position:relative;
+      z-index:1;
+      padding-top:90px;
+      padding-bottom:30px;
+      width:100%;
+      max-width:1250px;
+      margin:auto;
+    }
+
+.hero-badge{
+      display:inline-block;
+      padding:10px 18px;
+      margin-top: 10px;
+      border:1px solid rgba(0,255,127,0.35);
+      border-radius:999px;
+      background:rgba(0,255,127,0.08);
+      color:#9dffcd;
+      font-size:14px;
+      margin-bottom:10px;
+      box-shadow:0 0 18px rgba(0,255,127,0.12);
+    }
+
+    .hero h1{
+      font-size:64px;
+      color:#00ff7f;
+      letter-spacing:3px;
+      text-shadow:0 0 18px rgba(0,255,127,0.5);
+      margin-bottom:14px;
+    }
+
+    .hero p{
+      max-width:800px;
+      margin:auto;
+      font-size:18px;
+      line-height:1.9;
+      color:rgba(255,255,255,0.9);
+    }
+
+    .container{
+      position:relative;
+      z-index:1;
+      width:88%;
+      max-width:1250px;
+      margin:0 auto 50px;
+    }
+
+    .panel{
+      background:rgba(0,255,100,0.08);
+      backdrop-filter:blur(14px);
+      border-radius:24px;
+      padding:35px;
+      margin-bottom:35px;
+      border:1px solid rgba(0,255,100,0.22);
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+      transition:0.4s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%, rgba(0,255,127,0.04));
+      pointer-events:none;
+    }
+
+    .panel:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 25px rgba(0,255,127,0.22), 0 18px 38px rgba(0,0,0,0.35);
+    }
+
+    .panel h2{
+      color:#00ff7f;
+      font-size:32px;
+      margin-bottom:14px;
+      text-shadow:0 0 12px rgba(0,255,127,0.3);
+    }
+
+    .panel h3{
+      color:#00ff7f;
+      font-size:20px;
+      margin-bottom:14px;
+      text-shadow:0 0 12px rgba(0,255,127,0.3);
+    }
+
+    .panel p{
+      line-height:1.95;
+      color:rgba(255,255,255,0.92);
+      margin-bottom:14px;
+      font-size:16px;
+    }
+
+    .panel ul{
+      margin-left:20px;
+      margin-top:10px;
+      line-height:1.9;
+      margin-bottom: 10px;
+    }
+
+    .split-layout{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:36px;
+      flex-wrap:wrap;
+    }
+
+    .split-text{
+      flex:1;
+      min-width:280px;
+    }
+
+    .split-image{
+      flex:1;
+      min-width:260px;
+      text-align:center;
+    }
+
+    .split-image img{
+      width:100%;
+      max-width:400px;
+      border-radius:22px;
+      box-shadow:0 0 20px rgba(0,255,150,0.35), 0 12px 30px rgba(0,0,0,0.55);
+      transition:0.45s;
+    }
+
+    .split-image img:hover{
+      transform:scale(1.06) rotate(-1deg);
+      box-shadow:0 0 28px #00ff7f, 0 0 45px rgba(0,255,150,0.45);
+    }
+
+    .img-caption{
+      margin-top:10px;
+      color:#8dffbf;
+      font-size:14px;
+      letter-spacing:1px;
+    }
+
+    .formula{
+      font-size:44px;
+      text-align:center;
+      color:#00ff7f;
+      margin:18px 0;
+      text-shadow:0 0 18px rgba(0,255,127,0.45);
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:22px;
+      margin-top:22px;
+    }
+
+    .card{
+      background:rgba(0,0,0,0.55);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:18px;
+      padding:22px;
+      transition:0.35s;
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition:0.6s;
+    }
+
+    .card:hover::before{
+      left:100%;
+    }
+
+    .card:hover{
+      transform:translateY(-10px) scale(1.02);
+      box-shadow:0 0 22px rgba(0,255,127,0.3);
+      border-color:rgba(0,255,127,0.35);
+    }
+
+    .card h3{
+      color:#00ff7f;
+      margin-bottom:12px;
+      font-size:22px;
+    }
+
+    .card p{
+      line-height:1.8;
+      color:rgba(255,255,255,0.9);
+      margin-bottom:10px;
+      font-size:15px;
+    }
+
+    .card ul{
+      margin-left:18px;
+      line-height:1.8;
+      font-size:15px;
+      margin-bottom: 10px;
+    }
+
+    .card img{
+      margin-bottom: 10px;
+    }
+
+    .flip-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:24px;
+      margin-top:20px;
+    }
+
+    .flip-card{
+      perspective:1200px;
+      min-height:220px;
+    }
+
+    .flip-inner{
+      position:relative;
+      width:100%;
+      height:220px;
+      transform-style:preserve-3d;
+      transition:transform 0.8s;
+    }
+
+    .flip-card:hover .flip-inner{
+      transform:rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back{
+      position:absolute;
+      width:100%;
+      height:100%;
+      backface-visibility:hidden;
+      border-radius:20px;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .flip-front{
+      background:linear-gradient(135deg, rgba(0,170,85,0.95), rgba(0,90,45,0.95));
+      color:white;
+    }
+
+    .flip-front h3{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .flip-front p{
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .flip-back{
+      background:linear-gradient(135deg, rgba(0,45,25,0.96), rgba(0,20,10,0.96));
+      transform:rotateY(180deg);
+      color:white;
+      font-size:14px;
+      line-height:1.75;
+      align-items:flex-start;
+      text-align:left;
+    }
+
+    .quiz{
+      text-align:center;
+      margin-top:10px;
+    }
+
+    .quiz-title{
+      margin-bottom:22px;
+      color:#d7ffea;
+      font-size:16px;
+    }
+
+    .quiz-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:22px;
+      margin-top:20px;
+    }
+
+    .quiz-box{
+      background:rgba(0,0,0,0.45);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:20px;
+      padding:22px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      transition:0.35s;
+    }
+
+    .quiz-box:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 20px rgba(0,255,127,0.22);
+    }
+
+    .quiz-box h3{
+      margin-bottom:10px;
+      font-size:22px;
+    }
+
+    .easy-title{
+      color:#8cffc0;
+    }
+
+    .medium-title{
+      color:#ffe082;
+    }
+
+    .hard-title{
+      color:#ff9e9e;
+    }
+
+    .quiz input{
+      margin-top:12px;
+      padding:12px 16px;
+      width:280px;
+      max-width:90%;
+      border:none;
+      outline:none;
+      border-radius:16px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(0,255,127,0.25);
+      color:white;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    .quiz input::placeholder{
+      color:rgba(255,255,255,0.55);
+    }
+
+    .quiz input:focus{
+      border:1px solid #00ff7f;
+      box-shadow:0 0 15px rgba(0,255,127,0.35);
+    }
+
+    button{
+      margin-top:12px;
+      padding:12px 22px;
+      border:none;
+      border-radius:30px;
+      background:linear-gradient(135deg, #00aa55, #00ff7f);
+      color:black;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 0 16px rgba(0,255,127,0.25);
+    }
+
+    button:hover{
+      transform:scale(1.08);
+      box-shadow:0 0 22px rgba(0,255,127,0.5);
+    }
+
+    .answer{
+      margin-top:18px;
+      font-weight:600;
+      font-size:16px;
+      color:#9bffd0;
+      display:none;
+      border-radius:18px;
+      padding:18px;
+      max-width:500px;
+      margin-left:auto;
+      margin-right:auto;
+      line-height:1.8;
+    }
+
+    .correct{
+      display:block;
+      color:#cffff0;
+      background:rgba(0,255,127,0.08);
+      border:1px solid rgba(0,255,127,0.18);
+    }
+
+    .wrong{
+      display:block;
+      color:#ffd0d0;
+      background:rgba(255,80,80,0.08);
+      border:1px solid rgba(255,80,80,0.20);
+    }
+
+    .space-gif{
+      position:fixed;
+      bottom:25px;
+      right:25px;
+      width:120px;
+      opacity:0.92;
+      transition:0.3s;
+      z-index:999;
+      filter:drop-shadow(0 0 10px rgba(0,255,127,0.25));
+    }
+
+    .space-gif:hover{
+      transform:scale(1.14) rotate(6deg);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(40px);
+      transition:all 0.8s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media (max-width: 900px){
+      .navbar{
+        padding:0 20px;
+        height:auto;
+        min-height:90px;
+        flex-direction:column;
+        justify-content:center;
+        gap:8px;
+        padding-top:12px;
+        padding-bottom:12px;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:14px 18px;
+      }
+
+      .hero{
+        padding-top:150px;
+      }
+
+      .hero h1{
+        font-size:42px;
+      }
+
+      .panel{
+        padding:26px;
+      }
+
+      .formula{
+        font-size:34px;
+      }
+    }
+
+    @media (max-width: 600px){
+      .hero h1{
+        font-size:34px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      .panel h2{
+        font-size:26px;
+      }
+
+      .card h3{
+        font-size:20px;
+      }
+
+      .flip-inner{
+        height:250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="floating-orb orb3"></div>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="logo.png" class="logo-img" alt="Logo">
+      <div class="logo-text">PHYSICS LAB</div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="Grade 7.html">Grade 7</a></li>
+      <li><a href="Grade 8.html">Grade 8</a></li>
+      <li><a href="Grade9Choose.html">Grade 9</a></li>
+      <li><a href="Exercise.html">Exercise</a></li>
+      <li><a href="video.html">Video</a></li>
+      <li><a href="handout.html">Handout</a></li>
+      <li><a href="PPT .html">PPT</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="School info.html">School Information</a></li>
+      <li><a href="reference.html">References</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero reveal">
+    <div class="hero-badge">Physics • Dynamic Electricity </div>
+    <h1>GRADE 9 - SEMESTER 1 </h1>
+    <p>
+      Explore dynamic electricity, electric circuits, Ohm’s Law, conductors and insulators
+      through an interactive and visually engaging learning page.
+    </p>
+  </section>
+
+  <div class="container">
+
+    <!-- Separated Dynamic Electricity and Magnetism into distinct panels -->
+
+    <div class="panel reveal">
+      <h2>Dynamic Electricity</h2>
+      <p>
+        Dynamic electricity occurs when electric charges move through a material, typically electrons traveling through a conductor like a metal wire.
+        This movement of electrons, called <b>electric current</b>, transfers electrical energy from the power source to devices.
+      </p>
+      <p>
+        Dynamic electricity powers everyday technologies such as lamps, fans, and televisions. A complete path for electricity to move is called an <b>electric circuit</b>, which includes:
+      </p>
+      <ul>
+        <li>A power source (e.g., battery or generator)</li>
+        <li>Conducting wires</li>
+        <li>Electrical components (e.g., lamp, motor, resistor)</li>
+        <li>A switch to control the flow of electricity</li>
+      </ul>
+      <p>
+        When the circuit is closed, electrons move freely, and electricity flows. When the circuit is open, the current stops.
+      </p>
+    </div>
+
+    <div class="panel reveal">
+      <h2>Conductors and Insulators</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Conductors</h3>
+          <p>
+            Conductors are materials that allow electric current to flow easily because they contain many
+            <b>free electrons</b> that can move freely.
+          </p>
+          <p>Common conductors include:</p>
+          <ul>
+            <li>Copper</li>
+            <li>Aluminum</li>
+            <li>Iron</li>
+            <li>Silver</li>
+          </ul>
+          <p>
+            Copper is widely used in electrical wiring because it is a very good conductor and relatively affordable.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Insulators</h3>
+          <p>
+            Insulators are materials that do <b>not allow electric current to flow easily</b>.
+            Their electrons are tightly bound to atoms and cannot move freely.
+          </p>
+          <p>Examples of insulators include:</p>
+          <ul>
+            <li>Rubber</li>
+            <li>Plastic</li>
+            <li>Glass</li>
+            <li>Dry wood</li>
+          </ul>
+          <p>
+            Insulators are important for safety because they are used to cover electrical wires
+            and prevent electric shock.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel reveal">
+      <h2>Electric Current</h2>
+      <p>Electric current describes how fast electric charge flows through a conductor.
+        It tells us how much electric charge passes through a point in a circuit over time.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>The relationship is written using the formula:</h3>
+          <img src="current formulaaa.png" alt="Magnetic Poles" style="width:530px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          <p>Where:</p>
+          <ul>
+            <li>I = electric current (ampere / A)</li>
+            <li>Q = electric charge (coulomb / C)</li>
+            <li>t = time (second / s)</li>
+          </ul>
+          <p style="text-align: justify;">A larger amount of charge moving in a shorter time produces a greater electric current.</p>
+        </div>
+
+      <div class="card">
+          <h3>Measuring Electric Current</h3>
+          <p>
+            Electric current is measured using an ammeter, which is connected in series with the component being measured.
+          </p>
+          <img src="ammeter.webp" alt="Magnetic Poles" style="width:530px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          <p style="text-align: justify;">Higher current usually means more electrical energy is being transferred.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel reveal">
+      <h2>Voltage (Electric Potential Difference)</h2>
+      <p>Voltage is the amount of electrical energy available to move charges in a circuit. It can also be described as the energy per unit charge.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>The formula for voltage is:</h3>
+          <img src="Screenshot 2026-03-24 at 00.05.07.png" alt="Magnetic Poles" style="width:530px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          <p>Where:</p>
+          <ul>
+            <li>V = voltage (volt / V)</li>
+            <li>PE = electric potential energy (joule / J)</li>
+            <li>Q = charge (coulomb / C)</li>
+          </ul>
+          <p style="text-align: justify;">One volt means that one joule of energy is provided to each coulomb of charge.</p>
+        </div>
+
+      <div class="card">
+          <h3>Voltage Measurement</h3>
+          <p>
+            Voltage is measured using a voltmeter, which is connected in parallel with the component being measured.
+          </p>
+          <p style="text-align: center;">
+          <img src="Voltmeter.webp" alt="Magnetic Poles" style="width:400px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel reveal">
+      <h2>Electrical Resistance</h2>
+    
+      <p>
+        Electrical resistance is the property of a material that slows down or
+        opposes the flow of electric current.
+      </p>
+    
+      <h4>Effect of resistance on electric current:</h4>
+      <ul>
+        <li>Materials with low resistance allow current to flow easily.</li>
+        <li>Materials with high resistance make it harder for current to pass.</li>
+      </ul>
+    
+      <p>
+        Resistance is measured in ohms (Ω).
+      </p>
+    </div>
+
+    <div class="panel reveal">
+      <h2>Ohm’s Law</h2>
+      <p>Ohm’s Law explains the relationship between voltage, current, and resistance in an electrical circuit.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>The formula is:</h3>
+          <img src="Screenshot 2026-03-24 at 00.35.21.png" alt="Magnetic Poles" style="width:520px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          <p>Where:</p>
+          <ul>
+            <li>V = voltage (V)</li>
+            <li>I = current (A)</li>
+            <li>R = resistance (Ω)</li>
+          </ul>
+        </div>
+
+      <div class="card">
+          <h3>This law shows that:</h3>
+          <ul>
+            <li>Increasing voltage increases the current. </li>
+            <li>Increasing resistance decreases the current.</li>
+          </ul>
+          <p style="text-align: justify;">So, we can conclude that electric current is directly proportional to voltage and inversely proportional to resistance.</p>
+          <p style="text-align: center;">
+          <img src="Ohm law diagram.png" alt="Magnetic Poles" style="width:400px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+        </p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="panel reveal">
+      <h2>Electric Circuits</h2>
+      <p>An electric circuit is a closed path that allows electric current to flow from a power source through different components.</p>
+      <h3>There are two common types of circuits:</h3>
+      <div class="flip-grid">
+
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Series Circuit</h3>
+              <p>Hover to see the explanation</p>
+            </div>
+            <div class="flip-back">
+              <div>
+                A series circuit connects components in a single path. Electric current flows through each component one after another.<br><br>
+                <b>Characteristics:</b><br>
+                • Same current flows through all components<br>
+                • Voltage is shared between components<br>
+                • Total resistance increases when more devices are added<br><br>
+                If one component breaks, the entire circuit stops working.<br>
+                Example: old Christmas lights.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Parallel Circuit</h3>
+              <p>Hover to see the explanation</p>
+            </div>
+            <div class="flip-back">
+              <div>
+                A parallel circuit has multiple branches for current to flow.<br><br>
+                <b>Characteristics:</b><br>
+                • Each component receives the same voltage<br>
+                • Current splits between different branches<br>
+                • Total resistance decreases when more branches are added<br><br>
+                If one component stops working, the others still operate.<br>
+                Example: household electrical wiring.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel reveal">
+      <h2>Mini Quiz</h2>
+      <div class="quiz">
+        <p class="quiz-title">Answer these three short questions: easy, medium, and hard.</p>
+
+        <div class="quiz-grid">
+
+          <div class="quiz-box">
+            <h3 class="easy-title">Easy</h3>
+            <p>If voltage is 10V and resistance is 5Ω, what is the current?</p>
+            <input type="text" id="easyAnswer" placeholder="Type your answer...">
+            <br>
+            <button onclick="checkEasy()">Submit Easy</button>
+            <div class="answer" id="easyResult"></div>
+          </div>
+
+          <div class="quiz-box">
+            <h3 class="medium-title">Medium</h3>
+            <p>A current of 3A flows through a resistor of 4Ω. What is the voltage?</p>
+            <input type="text" id="mediumAnswer" placeholder="Type your answer...">
+            <br>
+            <button onclick="checkMedium()">Submit Medium</button>
+            <div class="answer" id="mediumResult"></div>
+          </div>
+
+          <div class="quiz-box">
+            <h3 class="hard-title">Hard</h3>
+            <p>A charge of 24 coulombs flows through a wire in 6 seconds. What is the current?</p>
+            <input type="text" id="hardAnswer" placeholder="Type your answer...">
+            <br>
+            <button onclick="checkHard()">Submit Hard</button>
+            <div class="answer" id="hardResult"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <img src="Lionel Messi Football GIF by FC Barcelona.gif" class="space-gif" alt="Floating GIF">
+
+  <script>
+    function checkEasy(){
+      let input = document.getElementById("easyAnswer").value.toLowerCase().trim();
+      let result = document.getElementById("easyResult");
+
+      if(input === "2" || input === "2a" || input === "2 a" || input === "2 ampere" || input === "2 amperes"){
+        result.className = "answer correct";
+        result.innerHTML = "Correct! 🎉<br><br>Using Ohm's Law:<br><b>I = V / R = 10 / 5 = 2 A</b>";
+      } else {
+        result.className = "answer wrong";
+        result.innerHTML = "Not correct.<br><br>Hint: Use <b>I = V / R</b>";
+      }
+    }
+
+    function checkMedium(){
+      let input = document.getElementById("mediumAnswer").value.toLowerCase().trim();
+      let result = document.getElementById("mediumResult");
+
+      if(input === "12" || input === "12v" || input === "12 v" || input === "12 volt" || input === "12 volts"){
+        result.className = "answer correct";
+        result.innerHTML = "Correct! 🎉<br><br>Using Ohm's Law:<br><b>V = I × R = 3 × 4 = 12 V</b>";
+      } else {
+        result.className = "answer wrong";
+        result.innerHTML = "Not correct.<br><br>Hint: Use <b>V = I × R</b>";
+      }
+    }
+
+    function checkHard(){
+      let input = document.getElementById("hardAnswer").value.toLowerCase().trim();
+      let result = document.getElementById("hardResult");
+
+      if(input === "4" || input === "4a" || input === "4 a" || input === "4 ampere" || input === "4 amperes"){
+        result.className = "answer correct";
+        result.innerHTML = "Correct! 🎉<br><br>Using the current formula:<br><b>I = Q / t = 24 / 6 = 4 A</b>";
+      } else {
+        result.className = "answer wrong";
+        result.innerHTML = "Not correct.<br><br>Hint: Use <b>I = Q / t</b>";
+      }
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll(){
+      reveals.forEach((el) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if(elementTop < windowHeight - revealPoint){
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+  </script>
+
+</body>
+</html>

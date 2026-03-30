@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grade 7 - Force</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+scroll-behavior:smooth;
+}
+
+
+body{
+min-height:100vh;
+
+background:
+linear-gradient(rgba(173,216,230,0.8), rgba(135,206,235,0.8)),
+url("minion.jpg");
+
+background-size:cover;
+background-position:center;
+
+padding-top:100px;
+}
+
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:80px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 60px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+.logo-container{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-img{
+height:60px;
+}
+
+.logo-text{
+font-size:24px;
+font-weight:600;
+color:#1e90ff;
+}
+
+.nav-links{
+display:flex;
+gap:35px;
+list-style:none;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:18px;
+position:relative;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#1e90ff;
+}
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-6px;
+width:0%;
+height:2px;
+background:#1e90ff;
+transition:0.3s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+
+h1{
+text-align:center;
+font-size:60px;
+margin-bottom:40px;
+color:#0a3d62;
+}
+
+
+.section{
+width:85%;
+margin:40px auto;
+padding:35px;
+background:rgba(255,255,255,0.9);
+border-radius:20px;
+box-shadow:0 15px 30px rgba(0,0,0,0.2);
+transition:0.4s;
+}
+
+.section:hover{
+transform:translateY(-8px);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+
+.flip{
+perspective:1000px;
+}
+
+.flip-inner{
+position:relative;
+height:160px;
+transition:0.6s;
+transform-style:preserve-3d;
+}
+
+.flip:hover .flip-inner{
+transform:rotateY(180deg);
+}
+
+.front,.back{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:15px;
+text-align:center;
+border-radius:10px;
+backface-visibility:hidden;
+}
+
+.front{
+background:#1e90ff;
+color:white;
+}
+
+.back{
+background:#0a3d62;
+color:white;
+transform:rotateY(180deg);
+}
+
+.image-box{
+text-align:center;
+margin-top:20px;
+}
+
+.image-box img{
+max-width:500px;
+width:100%;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+margin:10px;
+transition:0.4s;
+}
+
+.image-box img:hover{
+transform:scale(1.05);
+}
+
+
+.formula{
+font-size:40px;
+text-align:center;
+color:#1e90ff;
+margin-top:10px;
+}
+
+
+.quiz{
+text-align:center;
+margin-top:20px;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#1e90ff;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#0a3d62;
+transform:scale(1.05);
+}
+
+.answer{
+display:none;
+margin-top:10px;
+font-weight:bold;
+font-size:18px;
+color:#0a3d62;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+<div class="logo-container">
+<img src="logo.png" class="logo-img">
+<div class="logo-text">PHYSICS LAB</div>
+</div>
+
+<ul class="nav-links">
+<li><a href="Home.html">Home</a></li>
+<li><a href="Grade 7.html">Grade 7</a></li>
+<li><a href="Grade 8.html">Grade 8</a></li>
+<li><a href="Grade 9.html">Grade 9</a></li>
+<li><a href="Exercise.html">Exercise</a></li>
+<li><a href="handout.html">Handout</a></li>
+<li><a href="reference.html">References</a></li>
+</ul>
+
+</nav>
+
+<h1>Grade 7</h1>
+
+
+<div class="section">
+
+<h2>What is Force?</h2>
+
+<p>
+Force is a push or pull acting on an object due to interaction with another object.
+Whenever two objects interact, a force is applied.
+Forces are important in physics because they explain how objects move and change motion.
+</p>
+
+<p>
+Forces can:
+</p>
+
+<ul>
+<li>Change the speed of an object</li>
+<li>Change the direction of motion</li>
+<li>Start or stop movement</li>
+<li>Cause acceleration</li>
+<li>Change the shape of an object</li>
+</ul>
+
+<p>
+The standard unit used to measure force is called the <b>Newton (N)</b>.
+This unit is named after the famous scientist <b>Isaac Newton</b>, who studied motion and forces.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<h2>Newton's Laws of Motion</h2>
+
+<p>
+Newton’s Laws of Motion describe how forces affect the movement of objects.
+These three laws are the foundation of classical physics.
+</p>
+
+<div class="grid">
+
+<div class="flip">
+<div class="flip-inner">
+
+<div class="front">
+Newton's Law 1
+</div>
+
+<div class="back">
+An object at rest stays at rest and an object in motion continues moving unless acted upon by an unbalanced force. This is called inertia.
+</div>
+
+</div>
+</div>
+
+<div class="flip">
+<div class="flip-inner">
+
+<div class="front">
+Newton's Law 2
+</div>
+
+<div class="back">
+Acceleration depends on force and mass. More force produces greater acceleration, while larger mass makes acceleration harder.
+</div>
+
+</div>
+</div>
+
+<div class="flip">
+<div class="flip-inner">
+
+<div class="front">
+Newton's Law 3
+</div>
+
+<div class="back">
+For every action there is an equal and opposite reaction. Example: when you jump, the ground pushes you upward.
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>Force Diagram</h2>
+
+<p>
+A force diagram (also called a free-body diagram) is used to show all the forces acting on an object.
+The object is represented by a dot or box, and arrows are used to represent forces.
+</p>
+
+<p>
+The direction of the arrow shows the direction of the force, and the length of the arrow represents the strength of the force.
+Force diagrams help scientists and engineers understand how different forces affect motion.
+</p>
+
+</div>
+
+
+<div class="image-box">
+<h3>Force & Motion Diagram</h3>
+<img src="force arrow.png">
+<img src="motion diagram.png">
+<img src="Despicable Me Lol GIF.gif">
+</div>
+
+<div class="section">
+
+<h2>Types of Forces</h2>
+
+<p>
+Forces can be divided into two main categories: contact forces and non-contact forces.
+</p>
+
+<ul>
+
+<li><b>Friction</b> – A force that resists motion when two surfaces rub together.</li>
+
+<li><b>Gravity</b> – The force that pulls objects toward the Earth.</li>
+
+<li><b>Magnetic Force</b> – The attraction or repulsion between magnets and magnetic materials.</li>
+
+<li><b>Tension</b> – The pulling force transmitted through a rope or string.</li>
+
+<li><b>Normal Force</b> – The support force exerted by a surface.</li>
+
+<li><b>Air Resistance</b> – A force caused by air pushing against a moving object.</li>
+
+</ul>
+
+</div>
+
+
+<div class="section">
+
+<h2>Force Formula</h2>
+
+<div class="formula">
+F = m × a
+</div>
+
+<p style="text-align:center;margin-top:10px;">
+Force = Mass × Acceleration
+</p>
+
+<p style="text-align:center;margin-top:10px;">
+F = Force (Newton)<br>
+m = Mass (kg)<br>
+a = Acceleration (m/s²)
+</p>
+
+<p>
+This formula shows that increasing the force will increase acceleration.
+However, objects with larger mass require more force to accelerate.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>Examples of Force in Daily Life</h2>
+
+<ul>
+
+<li>Pushing a shopping cart in a supermarket</li>
+
+<li>Kicking a soccer ball across a field</li>
+
+<li>A magnet attracting metal objects</li>
+
+<li>Gravity pulling a falling apple toward the ground</li>
+
+<li>A parachute slowing down a skydiver</li>
+
+<li>A person pulling a suitcase with wheels</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="section">
+
+<h2>Mini Quiz</h2>
+
+<div class="quiz">
+
+<p>
+A box has a mass of 5 kg and accelerates at 2 m/s².  
+Using the formula F = m × a, what is the force?
+</p>
+
+<button onclick="showAnswer()">Check Answer</button>
+
+<div class="answer" id="answer">
+Correct! The force is 10 Newtons.
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showAnswer(){
+document.getElementById("answer").style.display="block";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physics Interactive Presentation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      color:white;
+      background:
+        linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.78)),
+        url("mercy.jpg");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,229,255,0.10), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(30,144,255,0.10), transparent 20%),
+        radial-gradient(circle at 50% 85%, rgba(255,255,255,0.05), transparent 20%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(10px);
+      opacity:0.28;
+      z-index:0;
+      animation:floatOrb 10s ease-in-out infinite;
+    }
+
+    .orb1{
+      width:120px;
+      height:120px;
+      background:#00e5ff;
+      top:120px;
+      left:40px;
+    }
+
+    .orb2{
+      width:160px;
+      height:160px;
+      background:#1e90ff;
+      top:260px;
+      right:60px;
+      animation-delay:2s;
+    }
+
+    .orb3{
+      width:90px;
+      height:90px;
+      background:#7df9ff;
+      bottom:70px;
+      left:120px;
+      animation-delay:4s;
+    }
+
+    @keyframes floatOrb{
+      0%{ transform:translateY(0px) translateX(0px); }
+      50%{ transform:translateY(-20px) translateX(8px); }
+      100%{ transform:translateY(0px) translateX(0px); }
+    }
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:82px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 50px;
+      background:rgba(0,0,0,0.58);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.10);
+      z-index:1000;
+    }
+
+    .logo-container{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-img{
+      height:56px;
+      width:auto;
+    }
+
+    .logo-text{
+      font-size:24px;
+      font-weight:700;
+      color:#1e90ff;
+      letter-spacing:1px;
+      text-shadow:0 0 10px rgba(30,144,255,0.35);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:28px;
+      list-style:none;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#00e5ff;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0%;
+      height:2px;
+      background:#00e5ff;
+      transition:0.3s;
+      box-shadow:0 0 10px rgba(0,229,255,0.5);
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .hero{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      width:90%;
+      max-width:1200px;
+      margin:0 auto;
+      padding-top:130px;
+      padding-bottom:40px;
+    }
+
+    .hero-badge{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.14);
+      color:#b7f7ff;
+      font-size:14px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.16);
+    }
+
+    .hero h1{
+      font-size:56px;
+      margin-bottom:14px;
+      color:white;
+      text-shadow:0 0 14px rgba(0,229,255,0.20);
+    }
+
+    .hero p{
+      font-size:18px;
+      color:rgba(255,255,255,0.86);
+      max-width:760px;
+      margin:auto;
+      line-height:1.9;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .hero-btn{
+      padding:12px 24px;
+      border:none;
+      border-radius:30px;
+      background:linear-gradient(135deg,#00cfff,#1e90ff);
+      color:white;
+      font-size:15px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 12px 24px rgba(30,144,255,0.20);
+    }
+
+    .hero-btn:hover{
+      transform:scale(1.06);
+      box-shadow:0 0 20px rgba(0,229,255,0.35);
+    }
+
+    .hero-btn.secondary{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:none;
+    }
+
+    .hero-btn.secondary:hover{
+      background:rgba(255,255,255,0.14);
+    }
+
+    .gif{
+      position:relative;
+      z-index:1;
+      display:flex;
+      justify-content:center;
+      margin:10px 0 50px;
+    }
+
+    .gif img{
+      width:320px;
+      max-width:85%;
+      border-radius:24px;
+      box-shadow:0 22px 40px rgba(0,0,0,0.45);
+      transition:0.4s;
+      border:1px solid rgba(255,255,255,0.12);
+    }
+
+    .gif img:hover{
+      transform:scale(1.05) rotate(-1deg);
+      box-shadow:0 0 24px rgba(0,229,255,0.25), 0 22px 40px rgba(0,0,0,0.45);
+    }
+
+    .filter-bar{
+      position:relative;
+      z-index:1;
+      width:90%;
+      max-width:1200px;
+      margin:0 auto 28px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .filter-btn{
+      padding:11px 20px;
+      border:none;
+      border-radius:30px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      color:white;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active{
+      background:linear-gradient(135deg,#00cfff,#1e90ff);
+      box-shadow:0 0 18px rgba(0,229,255,0.25);
+    }
+
+    .ppt-wrapper{
+      position:relative;
+      z-index:1;
+      width:90%;
+      max-width:1250px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:42px;
+      padding-bottom:70px;
+    }
+
+    .ppt-card{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.14);
+      padding:30px;
+      border-radius:24px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.30);
+      text-align:center;
+      transition:0.4s;
+      overflow:hidden;
+    }
+
+    .ppt-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 24px rgba(0,229,255,0.15), 0 24px 42px rgba(0,0,0,0.32);
+    }
+
+    .ppt-card h2{
+      margin-bottom:10px;
+      font-size:32px;
+      color:#8beeff;
+    }
+
+    .ppt-card p{
+      margin-bottom:22px;
+      color:rgba(255,255,255,0.82);
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    .pdf-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:20px;
+    }
+
+    .pdf-box{
+      background:rgba(0,0,0,0.20);
+      border-radius:20px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.10);
+    }
+
+    .pdf-box h3{
+      margin-bottom:12px;
+      font-size:18px;
+      color:#d4f9ff;
+    }
+
+    .pdf-box iframe{
+      width:100%;
+      height:650px;
+      border:none;
+      border-radius:16px;
+      background:white;
+    }
+
+    .open-btn{
+      display:inline-block;
+      margin-top:18px;
+      padding:11px 20px;
+      border-radius:30px;
+      text-decoration:none;
+      background:linear-gradient(135deg,#00cfff,#1e90ff);
+      color:white;
+      font-weight:600;
+      transition:0.3s;
+      box-shadow:0 12px 24px rgba(30,144,255,0.18);
+    }
+
+    .open-btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 18px rgba(0,229,255,0.30);
+    }
+
+    .floating-top{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:52px;
+      height:52px;
+      border:none;
+      border-radius:50%;
+      background:linear-gradient(135deg,#00cfff,#1e90ff);
+      color:white;
+      font-size:22px;
+      cursor:pointer;
+      z-index:999;
+      box-shadow:0 14px 24px rgba(30,144,255,0.22);
+      transition:0.3s;
+    }
+
+    .floating-top:hover{
+      transform:scale(1.08);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(36px);
+      transition:all 0.8s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .hidden-card{
+      display:none;
+    }
+
+    @media (max-width: 900px){
+      .navbar{
+        padding:0 18px;
+        height:auto;
+        min-height:90px;
+        flex-direction:column;
+        justify-content:center;
+        gap:8px;
+        padding-top:12px;
+        padding-bottom:12px;
+      }
+
+      .nav-links{
+        justify-content:center;
+        gap:12px 18px;
+      }
+
+      .hero{
+        padding-top:145px;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+
+      .ppt-card{
+        padding:20px;
+      }
+
+      .pdf-box iframe{
+        height:500px;
+      }
+    }
+
+    @media (max-width: 600px){
+      .hero h1{
+        font-size:30px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      .ppt-card h2{
+        font-size:24px;
+      }
+
+      .pdf-box iframe{
+        height:380px;
+      }
+
+      .gif img{
+        width:240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="logo.png" class="logo-img" alt="Logo">
+      <div class="logo-text">PHYSICS LAB</div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="Grade 7.html">Grade 7</a></li>
+      <li><a href="Grade 8.html">Grade 8</a></li>
+      <li><a href="Grade9Choose.html">Grade 9</a></li>
+      <li><a href="Exercise.html">Exercise</a></li>
+      <li><a href="video.html">Video</a></li>
+      <li><a href="handout.html">Handout</a></li>
+      <li><a href="PPT .html">PPT</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="School info.html">School Information</a></li>
+      <li><a href="reference.html">References</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero reveal">
+    <div class="hero-badge">Interactive PDF Presentation • Physics Slides • Grade 7–9</div>
+    <h1>Physics Interactive Presentation</h1>
+    <p>
+      Scroll below to explore our physics presentations. Use the filter buttons to jump between grades
+      and view the PDF slides directly on the page.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="hero-btn" onclick="filterCards('all', this)">Show All</button>
+      <button class="hero-btn secondary" onclick="document.getElementById('presentations').scrollIntoView({behavior:'smooth'})">View Presentations</button>
+    </div>
+  </section>
+
+  <div class="gif reveal">
+    <img src="Physics GIF.gif" alt="Physics GIF">
+  </div>
+
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('g7', this)">Grade 7</button>
+    <button class="filter-btn" onclick="filterCards('g8', this)">Grade 8</button>
+    <button class="filter-btn" onclick="filterCards('g9', this)">Grade 9</button>
+  </div>
+
+  <div class="ppt-wrapper" id="presentations">
+
+    <div class="ppt-card reveal" data-grade="g7">
+      <h2>Grade 7 – Force</h2>
+      <p>Explore the presentation for Grade 7 and review the basics of force and motion.</p>
+
+      <div class="pdf-grid">
+        <div class="pdf-box">
+          <h3>Force</h3>
+          <iframe src="Physics AP - G7 (2) (1).pdf"></iframe>
+        </div>
+      </div>
+
+      <a href="Physics AP - G7 (2) (1).pdf" class="open-btn" target="_blank">Open PDF in New Tab</a>
+    </div>
+
+    <div class="ppt-card reveal" data-grade="g8">
+      <h2>Grade 8 – Thermal Expansion</h2>
+      <p>Review the Grade 8 materials about thermal expansion and changes in matter.</p>
+
+      <div class="pdf-grid">
+        <div class="pdf-box">
+          <h3>Thermal Expansion</h3>
+          <iframe src="Physics AP-3 (2).pdf"></iframe>
+        </div>
+      </div>
+
+      <a href="Physics AP-3 (2).pdf" class="open-btn" target="_blank">Open PDF in New Tab</a>
+    </div>
+
+    <div class="ppt-card reveal" data-grade="g9">
+      <h2>Grade 9 – Magnetism</h2>
+      <p>View the Grade 9 presentation and study the key concepts of magnetism and dynamic electricity.</p>
+
+      <div class="pdf-grid">
+        <div class="pdf-box">
+          <h3>Magnetism</h3>
+          <iframe src="Physics AP - G9 (2).pdf"></iframe>
+        </div>
+
+        <div class="pdf-box">
+          <h3>Dynamic Electricity</h3>
+          <iframe src="Physics AP-4 (2).pdf"></iframe>
+        </div>
+      </div>
+
+      <a href="Physics AP - G9 (2).pdf" class="open-btn" target="_blank">Open Magnetism PDF</a>
+      <a href="Physics AP-4 (2).pdf" class="open-btn" target="_blank">Open Dynamic Electricity PDF</a>
+    </div>
+
+  </div>
+
+  <button class="floating-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <script>
+    function filterCards(grade, btn){
+      const cards = document.querySelectorAll(".ppt-card");
+      const buttons = document.querySelectorAll(".filter-btn");
+
+      buttons.forEach(button => button.classList.remove("active"));
+      if(btn && btn.classList.contains("filter-btn")){
+        btn.classList.add("active");
+      }
+
+      cards.forEach(card => {
+        if(grade === "all" || card.getAttribute("data-grade") === grade){
+          card.classList.remove("hidden-card");
+        } else {
+          card.classList.add("hidden-card");
+        }
+      });
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll(){
+      reveals.forEach((el) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if(elementTop < windowHeight - revealPoint){
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+  </script>
+
+</body>
+</html>

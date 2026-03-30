@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 9 Physics</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      color:white;
+      background:
+        linear-gradient(rgba(0,0,0,0.76),rgba(0,0,0,0.86)),
+        url("sun.jpg");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 123, 0, 0.12), transparent 18%),
+        radial-gradient(circle at 80% 30%, rgba(255, 191, 0, 0.08), transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(100,255,180,0.08), transparent 25%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .floating-orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(8px);
+      opacity:0.35;
+      z-index:0;
+      animation:floatOrb 10s ease-in-out infinite;
+    }
+
+    .orb1{
+      width:120px;
+      height:120px;
+      background:#ff9900;
+      top:120px;
+      left:40px;
+    }
+
+    .orb2{
+      width:180px;
+      height:180px;
+      background:#eada05;
+      bottom:100px;
+      right:60px;
+      animation-delay:2s;
+    }
+
+    .orb3{
+      width:90px;
+      height:90px;
+      background:#eb7f04;
+      top:380px;
+      right:220px;
+      animation-delay:4s;
+    }
+
+    @keyframes floatOrb{
+      0%{ transform:translateY(0px) translateX(0px); }
+      50%{ transform:translateY(-25px) translateX(10px); }
+      100%{ transform:translateY(0px) translateX(0px); }
+    }
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:85px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 50px;
+      background:rgba(0,0,0,0.45);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.12);
+      z-index:1000;
+    }
+
+    .logo-container{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-img{
+      height:58px;
+      width:auto;
+    }
+
+    .logo-text{
+      font-size:24px;
+      font-weight:700;
+      color: #ffd700;
+      text-shadow: 0 0 15px rgba(255,215,0,0.45);
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color: #ffd700;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0%;
+      height:2px;
+      background: #ffd700;
+      transition:0.35s;
+      box-shadow: 0 0 12px #ffd700;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .hero{
+      position:relative;
+      z-index:1;
+      padding-top:130px;
+      padding-bottom:40px;
+      width:88%;
+      max-width:1250px;
+      margin:auto;
+      text-align:center;
+    }
+
+    .hero-badge{
+      display:inline-block;
+      padding:10px 18px;
+      border: 1px solid rgba(255,215,0,0.35);
+      border-radius:999px;
+      background: rgba(255,215,0,0.08);
+      color: #ffd700;
+      font-size:14px;
+      margin-bottom:18px;
+      box-shadow: 0 0 18px rgba(255,215,0,0.12);
+    }
+
+    .hero h1{
+      font-size:64px;
+      color: #ffd700;
+      letter-spacing:3px;
+      text-shadow: 0 0 18px rgba(255,215,0,0.5);
+      margin-bottom:14px;
+    }
+
+    .hero p{
+      max-width:800px;
+      margin:auto;
+      font-size:18px;
+      line-height:1.9;
+      color:rgba(255,255,255,0.9);
+    }
+
+    .container{
+      position:relative;
+      z-index:1;
+      width:88%;
+      max-width:1250px;
+      margin:0 auto 50px;
+    }
+
+    .panel{
+      background: rgba(255,215,0,0.08);
+      backdrop-filter:blur(14px);
+      border-radius:24px;
+      padding:35px;
+      margin-bottom:35px;
+      border: 1px solid rgba(255,215,0,0.22);
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+      transition:0.4s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%, rgba(0,255,127,0.04));
+      pointer-events:none;
+    }
+
+    .panel:hover{
+      transform:translateY(-8px);
+      box-shadow: 0 0 25px rgba(255,215,0,0.22), 0 18px 38px rgba(0,0,0,0.35);
+    }
+
+    .panel h2{
+      color: #ffd700;
+      font-size:32px;
+      margin-bottom:14px;
+      text-shadow: 0 0 12px rgba(255,215,0,0.3);
+    }
+
+    .panel p{
+      line-height:1.95;
+      color:rgba(255,255,255,0.92);
+      margin-bottom:14px;
+      font-size:16px;
+    }
+
+    .panel ul{
+      margin-left:20px;
+      margin-top:10px;
+      line-height:1.9;
+    }
+
+    .split-layout{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:36px;
+      flex-wrap:wrap;
+    }
+
+    .split-text{
+      flex:1;
+      min-width:280px;
+    }
+
+    .split-image{
+      flex:1;
+      min-width:260px;
+      text-align:center;
+    }
+
+    .split-image img{
+      width:100%;
+      max-width:400px;
+      border-radius:22px;
+      box-shadow:0 0 20px rgba(0,255,150,0.35), 0 12px 30px rgba(0,0,0,0.55);
+      transition:0.45s;
+    }
+
+    .split-image img:hover{
+      transform:scale(1.06) rotate(-1deg);
+      box-shadow:0 0 28px #00ff7f, 0 0 45px rgba(0,255,150,0.45);
+    }
+
+    .img-caption{
+      margin-top:10px;
+      color:#8dffbf;
+      font-size:14px;
+      letter-spacing:1px;
+    }
+
+    .formula{
+      font-size:44px;
+      text-align:center;
+      color:#00ff7f;
+      margin:18px 0;
+      text-shadow:0 0 18px rgba(0,255,127,0.45);
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:22px;
+      margin-top:22px;
+    }
+
+    .card{
+      background:rgba(0,0,0,0.55);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:18px;
+      padding:22px;
+      margin-bottom: 10px;
+      transition:0.35s;
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition:0.6s;
+    }
+
+    .card:hover::before{
+      left:100%;
+    }
+
+    .card:hover{
+      transform:translateY(-10px) scale(1.02);
+      box-shadow: 0 0 22px rgba(255,215,0,0.3);
+      border-color: rgba(255,215,0,0.35);
+    }
+
+    .card h3{
+      color: #ffd700;
+      margin-bottom:12px;
+      font-size:22px;
+    }
+
+    .card p{
+      line-height:1.8;
+      color:rgba(255,255,255,0.9);
+      margin-bottom:10px;
+      font-size:15px;
+    }
+
+    .card ul{
+      margin-left:18px;
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    .flip-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:24px;
+      margin-top:20px;
+    }
+
+    .flip-card{
+      perspective:1200px;
+      min-height:220px;
+    }
+
+    .flip-inner{
+      position:relative;
+      width:100%;
+      height:220px;
+      transform-style:preserve-3d;
+      transition:transform 0.8s;
+    }
+
+    .flip-card:hover .flip-inner{
+      transform:rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back{
+      position:absolute;
+      width:100%;
+      height:100%;
+      backface-visibility:hidden;
+      border-radius:20px;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .flip-front{
+      background:linear-gradient(135deg, rgba(0,170,85,0.95), rgba(0,90,45,0.95));
+      color:white;
+    }
+
+    .flip-front h3{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .flip-front p{
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .flip-back{
+      background:linear-gradient(135deg, rgba(0,45,25,0.96), rgba(0,20,10,0.96));
+      transform:rotateY(180deg);
+      color:white;
+      font-size:14px;
+      line-height:1.75;
+      align-items:flex-start;
+      text-align:left;
+    }
+
+    .quiz{
+      text-align:center;
+      margin-top:10px;
+    }
+
+    .quiz-title{
+      margin-bottom:22px;
+      color:#d7ffea;
+      font-size:16px;
+    }
+
+    .quiz-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:22px;
+      margin-top:20px;
+    }
+
+    .quiz-box{
+      background:rgba(0,0,0,0.45);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:20px;
+      padding:22px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      transition:0.35s;
+    }
+
+    .quiz-box:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 20px rgba(0,255,127,0.22);
+    }
+
+    .quiz-box h3{
+      margin-bottom:10px;
+      font-size:22px;
+    }
+
+    .easy-title{
+      color:#8cffc0;
+    }
+
+    .medium-title{
+      color:#ffe082;
+    }
+
+    .hard-title{
+      color:#ff9e9e;
+    }
+
+    .quiz input{
+      margin-top:12px;
+      padding:12px 16px;
+      width:280px;
+      max-width:90%;
+      border:none;
+      outline:none;
+      border-radius:16px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(0,255,127,0.25);
+      color:white;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    .quiz input::placeholder{
+      color:rgba(255,255,255,0.55);
+    }
+
+    .quiz input:focus{
+      border:1px solid #00ff7f;
+      box-shadow:0 0 15px rgba(0,255,127,0.35);
+    }
+
+    button{
+      margin-top:12px;
+      padding:12px 22px;
+      border:none;
+      border-radius:30px;
+      background: linear-gradient(135deg, #aa9500, #ffd700);
+      color:black;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow: 0 0 16px rgba(255,215,0,0.25);
+    }
+
+    button:hover{
+      transform:scale(1.08);
+      box-shadow: 0 0 22px rgba(255,215,0,0.5);
+    }
+
+
+    .space-gif{
+      position:fixed;
+      bottom:25px;
+      right:25px;
+      width:120px;
+      opacity:0.92;
+      transition:0.3s;
+      z-index:999;
+      filter:drop-shadow(0 0 10px rgba(0,255,127,0.25));
+    }
+
+    .space-gif:hover{
+      transform:scale(1.14) rotate(6deg);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(40px);
+      transition:all 0.8s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media (max-width: 900px){
+      .navbar{
+        padding:0 20px;
+        height:auto;
+        min-height:90px;
+        flex-direction:column;
+        justify-content:center;
+        gap:8px;
+        padding-top:12px;
+        padding-bottom:12px;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:14px 18px;
+      }
+
+      .hero{
+        padding-top:150px;
+      }
+
+      .hero h1{
+        font-size:42px;
+      }
+
+      .panel{
+        padding:26px;
+        text-align: left;        .panel {
+          text-align: left;
+        }
+      }
+
+      .formula{
+        font-size:34px;
+      }
+    }
+
+    @media (max-width: 600px){
+      .hero h1{
+        font-size:34px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      .panel h2{
+        font-size:26px;
+      }
+
+      .card h3{
+        font-size:20px;
+      }
+
+      .flip-inner{
+        height:250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="floating-orb orb3"></div>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="logo.png" class="logo-img" alt="Logo">
+      <div class="logo-text">PHYSICS LAB</div>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="Grade 7.html">Grade 7</a></li>
+        <li><a href="Grade 8.html">Grade 8</a></li>
+        <li><a href="Grade9Choose.html">Grade 9</a></li>
+        <li><a href="Exercise.html">Exercise</a></li>
+        <li><a href="video.html">Video</a></li>
+        <li><a href="handout.html">Handout</a></li>
+        <li><a href="PPT .html">PPT</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="School info.html">School Information</a></li>
+        <li><a href="reference.html">References</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero reveal">
+    <div class="hero-badge">Physics •  Magnetism</div>
+    <h1>GRADE 9 - SEMESTER 2</h1>
+    <p style="font-size: 16px; color: #ffd700; text-align: center; margin-bottom: 20px;">Learn how magnetism works, explore magnetic fields, and understand how electricity and magnetism are connected in real-world applications.</p>
+
+      <div class="panel reveal" style="text-align: left;">
+        <h2>What is Magnet?</h2>
+        <p style="text-align: left;"></p>
+        A magnet is an object that produces an invisible force called a <b>magnetic field</b>, which allows it to attract certain materials.
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Types of Magnets</h3>
+            <p style="text-align: justify;">Magnets can be classified into <b>soft</b> and <b>hard</b> types. Soft magnetic materials, such as soft iron or ordinary steel, act as temporary magnets that magnetize easily but quickly lose their magnetism when the external magnetic field is removed. In contrast, hard magnetic materials, like neodymium-iron-boron (NdFeB), alnico, and samarium-cobalt (SmCo), are permanent magnets that keep their magnetism for a long time and are not easily demagnetized.</p>
+          </div>
+        <div class="card">
+          <h3>Magnetic Poles</h3>
+          <p>Every magnet has two poles: <b>North</b> and <b>South</b>. Opposite poles attract each other, while like poles repel.</p>
+            <img src="magnetic poles.png" alt="Magnetic Poles" style="width:100; max-width:200px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+        </div>
+        </div>
+          <div class="card">
+            <h3>Magnetic and Non-magnetic Material </h3>
+            <p style="text-align: left;"></p>Materials such as iron, nickel, cobalt, and steel are magnetic, while materials like plastic, wood, paper, aluminium, copper, and rubber are non-magnetic.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel reveal" style="text-align: left;">
+        <h2>Magnetic Field</h2>
+            <p style="text-align: left;"></p>
+              A magnetic field is the region around a magnet where magnetic forces act. Although it cannot be seen directly, it can be shown using iron filings, which form curved lines around the magnet.
+            </p>
+            <h4>The strength of a magnetic field depends on the spacing of the field lines: </h4>
+            <ul>
+              <li>Field lines close together indicate a strong magnetic field</li>
+              <li>Field lines farther apart indicate a weak magnetic field</li>
+            </ul>
+            <p style="text-align: left;"></p> Field line move from the north pole to the south pole outside the magnet. The most dense part of the magnetic field is near the poles of a magnet, indicating that the poles is the strongest part of a magnet.</p>
+          </div>
+        </div>
+      </div> 
+
+      <div class="panel reveal" style="text-align: left;">
+        <h2>Making and Removing Magnets </h2>
+
+        <div class="grid" style="text-align: justify;">
+          <div class="card">
+            <h3>Making Magnets</h3>
+            <p style="text-align: justify;"></p>Magnets can be made through <b>magnetization</b> by rubbing a magnetic material with a magnet in one direction repeatedly. This aligns the magnetic domains inside the material.</p>
+            <img src="Magnetisation.jpg" alt="Magnetic Poles" style="width:500px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          </div>
+
+          <div class="card" style="text-align: justify;">
+            <h3>Removing Magnets </h3>
+            <p style="text-align: justify;"></p>Magnetism can be removed through <b>demagnetization</b>, usually by heating soft magnetic materials. Heat disrupts the alignment of magnetic domains, causing the magnetism to disappear. Other than heat, strong impacts such as hammering or dropping a magnet can also can disrupt the orientation of magnetic domains.</p>
+            <img src="Hammer.png" alt="Magnetic Poles" style="width:500px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          </div>
+        </div>
+      </div>
+    
+      <div class="panel reveal" style="text-align: left;">
+        <h2>Electromagnetism: Magnetic Effect of Electric Current</h2>
+        <p style="text-align: left;"></p>
+        Electromagnetism occurs when an electric current flows through a wire, producing a magnetic field around the wire. This magnetic field forms circular field lines surrounding the current-carrying wire.
+        </p>
+
+      <div class="grid">
+        <div class="card" style="text-align: justify;">
+          <p style="text-align: justify;">         
+           <h4>How to increase the strength of electromagnet:</h4>
+          <ul>
+            <li>Increase the current</li>
+            <li>Increase the number of coils (turns)</li>
+            <li>Use a high-permeability ferromagnetic core such as a soft iron core</li>
+          </ul>
+          </p>
+        </div>
+        <p align="right">
+        <img src="Electromagnet-3.png" alt="Magnetic Poles"  style="width: 400px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
+      </p>
+      </div>
+      </div>
+    </div>
+
+    <div class="panel reveal" style="text-align: left;">
+      <h2>Direction of Magnetic Field</h2>
+      <p style="text-align: left;"></p>The direction of the magnetic field depends on the direction of the electric current.</p>
+      <div class="grid" style="text-align: justify;">
+        <div class="card">
+          <h3>Right-Hand Grip Rule</h3>
+          <p style="text-align: justify;"></p> The Right-Hand Grip Rule is used to determine magnetic field direction: 
+          <ul>
+            <li>The thumb points in the direction of the current</li>
+            <li>The curled fingers show the direction of the magnetic field</li>
+          </ul>
+    
+        </p>
+        <p align="center">
+          <img src="Right hand grip rule.webp" alt="Magnetic Poles" style="width:300px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+        </p>
+        </div>
+
+        <div class="card" style="text-align: justify;">
+          <h3>Dot and Cross Symbols</h3>
+          <p style="text-align: justify;"></p>
+          <ul>
+            <li>A dot (•) represents current flowing out of the page, toward the observer</li>
+            <li>A cross (×) represents current flowing into the page, away from the observer
+            </li>
+          </ul>
+          </p>
+          <img src="current tru.png" alt="Magnetic Poles" style="width:500px; margin-top:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align: center;" >
+          <p>When the direction of the current is reversed, the direction of the magnetic field is also reversed.</p>
+        </div>
+      </div>
+    </div>
+
+
+  
+
+  <script>
+    function checkEasy(){
+      let input = document.getElementById("easyAnswer").value.toLowerCase().trim();
+      let result = document.getElementById("easyResult");
+
+      if(input === "2" || input === "2a" || input === "2 a" || input === "2 ampere" || input === "2 amperes"){
+        result.className = "answer correct";
+        result.innerHTML = "Correct! 🎉<br><br>Using Ohm's Law:<br><b>I = V / R = 10 / 5 = 2 A</b>";
+      } else {
+        result.className = "answer wrong";
+        result.innerHTML = "Not correct.<br><br>Hint: Use <b>I = V / R</b>";
+      }
+    }
+
+    function checkMedium(){
+      let input = document.getElementById("mediumAnswer").value.toLowerCase().trim();
+      let result = document.getElementById("mediumResult");
+
+      if(input === "12" || input === "12v" || input === "12 v" || input === "12 volt" || input === "12 volts"){
+        result.className = "answer correct";
+        result.innerHTML = "Correct! 🎉<br><br>Using Ohm's Law:<br><b>V = I × R = 3 × 4 = 12 V</b>";
+      } else {
+        result.className = "answer wrong";
+        result.innerHTML = "Not correct.<br><br>Hint: Use <b>V = I × R</b>";
+      }
+    }
+
+    function checkHard(){
+      let input = document.getElementById("hardAnswer").value.toLowerCase().trim();
+      let result = document.getElementById("hardResult");
+
+      if(input === "4" || input === "4a" || input === "4 a" || input === "4 ampere" || input === "4 amperes"){
+        result.className = "answer correct";
+        result.innerHTML = "Correct! 🎉<br><br>Using the current formula:<br><b>I = Q / t = 24 / 6 = 4 A</b>";
+      } else {
+        result.className = "answer wrong";
+        result.innerHTML = "Not correct.<br><br>Hint: Use <b>I = Q / t</b>";
+      }
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll(){
+      reveals.forEach((el) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if(elementTop < windowHeight - revealPoint){
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+  </script>
+
+</body>
+</html>

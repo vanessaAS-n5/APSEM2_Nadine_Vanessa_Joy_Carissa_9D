@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics - Force</title>
+
+<style>
+
+
+.physics-images{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:30px;
+
+width:80%;
+margin:50px auto;
+
+}
+
+
+.physics-images img{
+
+width:100%;
+height:230px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+
+transition:0.4s;
+
+opacity:0;
+
+transform:translateY(40px);
+
+animation:fadeUp 1s forwards;
+
+}
+
+
+.physics-images img:nth-child(1){
+animation-delay:0.2s;
+}
+
+.physics-images img:nth-child(2){
+animation-delay:0.4s;
+}
+
+.physics-images img:nth-child(3){
+animation-delay:0.6s;
+}
+
+.physics-images img:hover{
+
+transform:scale(1.08) rotate(-1deg);
+
+box-shadow:
+0 0 20px rgba(255,120,0,0.9),
+0 0 35px rgba(255,180,80,0.6);
+
+}
+
+@keyframes fadeUp{
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+.physics-gif{
+
+position:fixed;
+
+right:30px;
+bottom:30px;
+
+width:120px;
+
+opacity:0.9;
+
+transition:0.3s;
+
+z-index:999;
+
+}
+
+.physics-gif:hover{
+
+transform:scale(1.15) rotate(5deg);
+
+} 
+
+    *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+
+body{
+min-height:100vh;
+
+background:
+linear-gradient(rgba(20,20,20,0.7),rgba(20,20,20,0.8)),
+url("science.jpg");
+
+background-size:cover;
+background-position:center;
+
+padding-top:110px;
+color:white;
+}
+
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:85px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:0 60px;
+
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(12px);
+
+border-bottom:1px solid rgba(255,255,255,0.1);
+
+z-index:1000;
+}
+
+.logo-container{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-img{
+height:60px;
+}
+
+.logo-text{
+font-size:26px;
+font-weight:600;
+color:#ff6a00;
+letter-spacing:1px;
+}
+
+
+.nav-links{
+display:flex;
+gap:35px;
+list-style:none;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:18px;
+position:relative;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#ff6a00;
+}
+
+.nav-links a::after{
+content:"";
+position:absolute;
+
+left:0;
+bottom:-6px;
+
+width:0%;
+height:2px;
+
+background:#ff6a00;
+
+transition:0.4s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+.hero{
+      text-align:center;
+      position:relative;
+      z-index:1;
+      padding-top:30px;
+      padding-bottom:0px;
+      width:100%;
+      max-width:1250px;
+      margin:auto;
+    }
+
+
+  .hero-badge{
+    
+  display:inline-block;
+  padding:10px 18px;
+  border:2px solid rgba(139, 4, 4, 0.414);
+  border-radius:999px;
+  background:rgba(117, 34, 34, 0.08);
+  color:#f61111;
+  font-size:15px;
+
+  margin-top:-25px;
+  margin-bottom:6px;
+
+  box-shadow:0 0 18px rgba(255, 0, 0, 0.12);
+
+  /* animation */
+  opacity:0;
+  animation:heroFadeUp 1s ease forwards;
+}
+
+.hero h1{
+  margin-top: 0px;   /* ← bring title closer to badge */
+}
+
+h1{
+text-align:center;
+font-size:64px;
+margin-bottom:40px;
+margin-top: 0px;
+
+
+
+color:#ff9c42;
+
+text-shadow:
+0 0 10px rgba(255,150,50,0.9),
+0 0 25px rgba(255,120,0,0.7);
+
+opacity:0;
+  transform:translateY(40px);
+  animation:heroFadeUp 1s ease forwards;
+  animation-delay:0.3s;
+}
+
+
+.section{
+
+width:85%;
+margin:40px auto;
+
+padding:40px;
+
+border-radius:22px;
+
+background:rgba(255,255,255,0.07);
+
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,0.12);
+
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
+transition:0.4s;
+}
+
+.section:hover{
+
+transform:translateY(-10px);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,0.6),
+0 0 20px rgba(255,120,0,0.5);
+
+}
+
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+gap:25px;
+
+margin-top:20px;
+
+}
+
+.card{
+
+background:linear-gradient(135deg,#ff6a00,#ff9c42);
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+color:white;
+
+font-size:18px;
+
+transition:0.4s;
+
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
+
+}
+
+.card:hover{
+
+transform:scale(1.08) rotate(-1deg);
+
+box-shadow:
+0 0 15px rgba(255,120,0,0.9),
+0 0 25px rgba(255,160,80,0.6);
+
+}
+
+
+.formula{
+
+font-size:46px;
+
+text-align:center;
+
+margin-top:10px;
+
+color:#ff9c42;
+
+text-shadow:0 0 15px rgba(255,120,0,0.7);
+
+}
+
+
+p{
+line-height:1.7;
+margin-top:10px;
+
+opacity:0;
+transform:translateY(20px);
+animation:fadeUp 1s forwards;
+}
+
+
+.image-box{
+text-align:center;
+margin-top:30px;
+}
+
+.image-box img{
+
+max-width:420px;
+width:100%;
+
+border-radius:15px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+
+transition:0.4s;
+
+}
+
+.image-box img:hover{
+transform:scale(1.07);
+}
+
+button{
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:30px;
+
+background:linear-gradient(135deg,#ff6a00,#ff9c42);
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+margin-top:15px;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.1);
+
+box-shadow:
+0 0 20px rgba(255,140,0,0.9),
+0 0 30px rgba(255,180,90,0.6);
+
+}
+
+
+.heat-gif{
+
+position:fixed;
+
+bottom:20px;
+left:20px;
+
+width:140px;
+
+opacity:0.9;
+
+transition:0.3s;
+
+}
+
+.heat-gif:hover{
+transform:scale(1.1);
+} 
+
+    .navbar{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:80px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:0 50px;
+
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+
+z-index:1000;
+
+}
+
+
+.logo-container{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+}
+
+.logo-img{
+
+height:60px;
+width:auto;
+
+}
+
+
+.logo-text{
+
+font-size:24px;
+font-weight:600;
+color:#1e90ff;
+
+}
+
+
+.nav-links{
+
+display:flex;
+gap:35px;
+list-style:none;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+color:white;
+font-size:18px;
+
+position:relative;
+transition:0.3s;
+
+}
+
+.nav-links a:hover{
+color:#1e90ff;
+}
+
+.nav-links a::after{
+
+content:"";
+position:absolute;
+
+left:0;
+bottom:-6px;
+
+width:0%;
+height:2px;
+
+background:#1e90ff;
+
+transition:0.3s;
+
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:80px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:0 60px;
+
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(12px);
+
+border-bottom:1px solid rgba(255,255,255,0.1);
+
+z-index:1000;
+}
+
+
+.logo{
+font-size:28px;
+font-weight:bold;
+letter-spacing:2px;
+color:#ff2e2e;
+text-shadow:0 0 10px rgba(255,0,0,0.7);
+}
+
+
+.nav-links{
+list-style:none;
+display:flex;
+gap:35px;
+}
+
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:16px;
+font-weight:500;
+position:relative;
+padding:6px 0;
+transition:0.3s;
+}
+
+
+.nav-links a:hover{
+color:#ff3b3b;
+}
+
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-5px;
+
+width:0%;
+height:2px;
+
+background:#ff2e2e;
+
+transition:0.4s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+
+body{
+padding-top:100px;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+min-height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),
+url("spiderman.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+}
+
+h1{
+text-align:center;
+font-size:55px;
+margin:40px 0;
+color:#ff2e2e;
+letter-spacing:3px;
+text-shadow:0 0 20px red;
+}
+
+
+.container{
+width:85%;
+margin:auto;
+}
+
+
+.panel{
+background:rgba(255,0,0,0.07);
+backdrop-filter:blur(10px);
+border-radius:18px;
+padding:30px;
+margin-bottom:40px;
+
+border:1px solid rgba(255,0,0,0.3);
+
+transition:0.4s;
+}
+
+.panel:hover{
+transform:scale(1.02);
+box-shadow:0 0 25px rgba(255,0,0,0.5);
+}
+
+h2{
+margin-bottom:10px;
+color:#ff4444;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+
+.card{
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:12px;
+text-align:center;
+
+transition:0.3s;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 20px red;
+}
+
+
+.flip-card{
+perspective:1000px;
+}
+
+.flip-inner{
+position:relative;
+width:100%;
+height:160px;
+transition:transform 0.6s;
+transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-inner{
+transform:rotateY(180deg);
+}
+
+.flip-front, .flip-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:15px;
+border-radius:10px;
+}
+
+.flip-front{
+background:#b30000;
+}
+
+.flip-back{
+background:#330000;
+transform:rotateY(180deg);
+font-size:14px;
+}
+
+
+.formula{
+font-size:40px;
+text-align:center;
+margin-top:10px;
+color:#ff4b4b;
+}
+
+
+.quiz{
+text-align:center;
+margin-top:20px;
+}
+
+button{
+margin-top:10px;
+padding:10px 18px;
+border:none;
+border-radius:20px;
+background:#ff2e2e;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+background:#ff0000;
+}
+
+.answer{
+margin-top:10px;
+color:#00ffcc;
+font-weight:bold;
+font-size:18px;
+display:none;
+}
+
+.intro-desc{
+width:85%;
+margin:30px auto 5px auto;  
+
+font-size:18px; 
+
+color:#ff3b3b;  
+
+text-align:center;
+
+line-height:1.6;
+
+letter-spacing:0.5px;
+
+text-shadow:0 0 10px rgba(255,0,0,0.6);
+
+opacity:0;
+transform:translateY(20px);
+animation:fadeUp 1s forwards;
+
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+    <nav>
+
+
+<nav class="navbar">
+
+<div class="logo-container">
+<img src="logo.png" class="logo-img">
+<div class="logo-text">PHYSICS LAB</div>
+</div>
+
+<ul class="nav-links">
+    <li><a href="Home.html">Home</a></li>
+    <li><a href="Grade 7.html">Grade 7</a></li>
+    <li><a href="Grade 8.html">Grade 8</a></li>
+    <li><a href="Grade9Choose.html">Grade 9</a></li>
+    <li><a href="Exercise.html">Exercise</a></li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="handout.html">Handout</a></li>
+    <li><a href="PPT .html">PPT</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="School info.html">School Information</a></li>
+    <li><a href="reference.html">References</a></li>
+</ul>
+
+</nav>
+<section class="hero reveal">
+    <div class="hero-badge">Physics •  Thermal Expansion</div>
+</section>
+<h1> GRADE 8</h1> 
+<p style="font-size: 16px; color: #ff0000; text-align: center; margin-bottom: 20px;">Learn how thermal expansion works, why materials expand when heated, and how this concept is used in real-life science and engineering.</p>
+
+<div class="physics-images">
+
+<img src="ball and ring.jpg" alt="Ball and Ring Experiment">
+
+<img src="metal rod heated.webp" alt="Thermal Expansion">
+
+</div>
+
+<div class="container">
+
+
+<div class="panel">
+<div class="panel">
+<h2>Introduction to Physics Concepts</h2>
+
+</div>
+
+
+<div class="panel">
+
+<h2>Thermal Expansion</h2>
+
+
+<p>
+Thermal expansion is the tendency of a substance to change its size when the temperature changes.
+Most materials expand when heated and contract when cooled.
+This occurs because all matter is made of tiny particles that are always moving.
+</p>
+
+<p>
+When a material is heated, the particles gain kinetic energy and move faster.
+This increased motion causes the particles to spread farther apart, increasing the size of the object.
+When temperature decreases, particle motion slows and the particles move closer together,
+causing the object to contract.
+</p>
+
+<p>
+Thermal expansion can affect the <b>length, area, or volume</b> of a material.
+Engineers must consider thermal expansion when designing bridges, railway tracks,
+buildings, and pipelines to prevent structural damage.
+</p>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Why Thermal Expansion Happens</h2>
+
+<div class="grid">
+
+<div class="card">
+All matter is made of extremely tiny particles such as atoms and molecules.
+</div>
+
+<div class="card">
+These particles are constantly moving and vibrating.
+</div>
+
+<div class="card">
+Heating gives particles more energy, making them move faster.
+</div>
+
+<div class="card">
+Faster particle motion increases the distance between particles.
+</div>
+
+<div class="card">
+Cooling reduces particle motion and decreases the space between particles.
+</div>
+
+<div class="card">
+The particles themselves do not grow larger — only the space between them changes.
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Thermal Expansion in Different States of Matter</h2>
+
+<div class="grid">
+
+<div class="card">
+<b>Solids</b><br><br>
+Solids expand the least because their particles are tightly packed and strongly bonded.
+Expansion mainly occurs as an increase in length or volume.
+</div>
+
+<div class="card">
+<b>Liquids</b><br><br>
+Liquids expand more than solids because their particles have weaker bonds and can move more freely.
+This property is used in thermometers.
+</div>
+
+<div class="card">
+<b>Gases</b><br><br>
+Gases expand the most since their particles are very far apart and move freely in all directions.
+Gas volume can increase greatly when heated.
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Linear Expansion in Solids</h2>
+
+<p>
+Linear expansion refers to the change in length of a solid material when the temperature changes.
+Different materials expand by different amounts when heated.
+</p>
+
+<div class="formula">
+ΔL = L₀ × α × ΔT
+</div>
+
+<p style="text-align:center;margin-top:10px;">
+Change in Length = Original Length × Coefficient of Expansion × Temperature Change
+</p>
+
+<div class="grid">
+
+<div class="card">
+<b>ΔL</b><br>
+Change in length of the object
+</div>
+
+<div class="card">
+<b>L₀</b><br>
+Original length of the object
+</div>
+
+<div class="card">
+<b>α</b><br>
+Coefficient of linear expansion (depends on the material)
+</div>
+
+<div class="card">
+<b>ΔT</b><br>
+Change in temperature
+</div>
+
+</div>
+
+<p>
+Materials such as aluminum expand more than steel because they have a larger coefficient of expansion.
+</p>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Thermal Expansion in Gases</h2>
+
+<p>
+Gas particles move freely and very quickly. When a gas is heated, the particles move faster
+and collide more frequently with the walls of the container.
+</p>
+
+<p>
+If the container can expand, the gas volume increases.  
+If the container is rigid and cannot change size, the pressure increases instead.
+</p>
+
+<div class="formula">
+P₁ / T₁ = P₂ / T₂
+</div>
+
+<p style="text-align:center;margin-top:10px;">
+Gay-Lussac's Law
+</p>
+
+<div class="grid">
+
+<div class="card">
+<b>P₁</b><br>
+Initial Pressure
+</div>
+
+<div class="card">
+<b>P₂</b><br>
+Final Pressure
+</div>
+
+<div class="card">
+<b>T₁</b><br>
+Initial Temperature (Kelvin)
+</div>
+
+<div class="card">
+<b>T₂</b><br>
+Final Temperature (Kelvin)
+</div>
+
+</div>
+
+<p>
+This law states that pressure is directly proportional to temperature when the volume remains constant.
+</p>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Thermal Expansion in Liquids</h2>
+
+<p>
+Liquids generally expand when heated and contract when cooled.
+However, water behaves differently between 0°C and 4°C.
+This unusual behavior is called <b>Anomalous Expansion of Water</b>.
+</p>
+
+<div class="grid">
+
+<div class="card">
+Water expands when cooled from 4°C to 0°C.
+</div>
+
+<div class="card">
+Water contracts when heated from 0°C to 4°C.
+</div>
+
+<div class="card">
+Water reaches its maximum density at 4°C.
+</div>
+
+<div class="card">
+Because ice is less dense than water, it floats on the surface.
+</div>
+
+</div>
+
+<p>
+This property is extremely important for life on Earth.
+When lakes freeze, the ice forms on the surface instead of the bottom,
+allowing aquatic animals and plants to survive during winter.
+</p>
+
+</div>
+
+
+
+<div class="panel">
+
+<h2>Real Life Examples of Thermal Expansion</h2>
+
+<div class="grid">
+
+<div class="card">
+Railway tracks have small gaps to allow expansion during hot weather.
+</div>
+
+<div class="card">
+Bridges use expansion joints so they do not crack when temperatures change.
+</div>
+
+<div class="card">
+Electric power lines sag during hot weather due to expansion.
+</div>
+
+<div class="card">
+Thermometers use liquid expansion to measure temperature.
+</div>
+
+<div class="card">
+Metal lids on jars loosen when heated because the lid expands.
+</div>
+
+<div class="card">
+Hot air balloons rise because heated air expands and becomes less dense.
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showAnswer(){
+document.getElementById("answer").style.display="block";
+}
+
+
+
+
+</script>
+<img src="Miles Morales Marvel GIF by Sony Pictures Animation.gif" class="physics-gif">
+</body>
+</html>

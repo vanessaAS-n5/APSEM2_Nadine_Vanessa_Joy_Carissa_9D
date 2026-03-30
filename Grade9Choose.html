@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 9 Semester Selection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0,0,0,0.76),rgba(0,0,0,0.86)),
+        url("sun.jpg");
+      background-size: cover;
+      background-position: center;
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .button {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: 600;
+      color: rgb(191, 89, 0);
+      background: #ffd700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
+    }
+
+    .button:active {
+      transform: scale(1.05);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 85px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 50px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 1000;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffd700;
+    }
+
+ .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: #ffd700;
+      transition: 0.35s;
+      box-shadow: 0 0 12px #ffd700;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 58px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffd700;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.45);
+      letter-spacing: 1px;
+    }
+    .intro-desc{
+width:85%;
+margin:30px auto 5px auto;
+
+font-size:18px;
+
+color:#ffd700;
+
+text-align:center;
+
+line-height:1.6;
+
+letter-spacing:0.5px;
+
+text-shadow:0 0 10px rgba(255,215,0,0.6);
+
+opacity:0;
+transform:translateY(20px);
+animation:fadeUp 1s forwards;
+animation-delay:0.2s;
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="logo.png" class="logo-img" alt="Physics Lab Logo">
+      <div class="logo-text">PHYSICS LAB</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="Grade 7.html">Grade 7</a></li>
+        <li><a href="Grade 8.html">Grade 8</a></li>
+        <li><a href="Grade9Choose.html">Grade 9</a></li>
+        <li><a href="Exercise.html">Exercise</a></li>
+        <li><a href="video.html">Video</a></li>
+        <li><a href="handout.html">Handout</a></li>
+        <li><a href="PPT .html">PPT</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="School info.html">School Information</a></li>
+        <li><a href="reference.html">References</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+      
+
+
+<div class="button-container">
+    <div class="button-container">
+      <button class="button" onclick="location.href='Grade 9.html'">Semester 1</button>
+      <button class="button" onclick="location.href='magnet.html'">Semester 2</button>
+    </div>
+  </div>
+</body>
+</html>

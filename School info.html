@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Information</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(10,15,30,0.72), rgba(10,15,30,0.82)),
+        url("school-bg.jpg");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      color:white;
+      padding-top:110px;
+      overflow-x:hidden;
+    }
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:85px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 60px;
+      background:rgba(0,0,0,0.45);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.12);
+      z-index:1000;
+    }
+
+    .logo-container{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-img{
+      height:58px;
+      width:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 0 8px rgba(255,255,255,0.25));
+    }
+
+    .logo-text{
+      font-size:25px;
+      font-weight:700;
+      letter-spacing:1px;
+      color:#ffd76a;
+      text-shadow:0 0 12px rgba(255,215,106,0.45);
+    }
+
+    .nav-links{
+      list-style:none;
+      display:flex;
+      gap:30px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#ffd76a;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:#ffd76a;
+      transition:0.35s;
+      border-radius:10px;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .hero{
+      width:90%;
+      max-width:1250px;
+      margin:30px auto 60px;
+      display:grid;
+      grid-template-columns:0.95fr 1.35fr;
+      gap:32px;
+      align-items:stretch;
+    }
+
+    .card{
+      position:relative;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.14);
+      backdrop-filter:blur(16px);
+      border-radius:28px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.35);
+      overflow:hidden;
+      transition:0.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:
+        0 18px 45px rgba(0,0,0,0.45),
+        0 0 22px rgba(255,215,106,0.15);
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(255,215,106,0.10), transparent 35%, rgba(255,255,255,0.05));
+      pointer-events:none;
+    }
+
+    .logo-card{
+      min-height:560px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:40px 28px;
+    }
+
+    .logo-circle{
+      width:250px;
+      height:250px;
+      border-radius:50%;
+      background:radial-gradient(circle at top, rgba(255,255,255,0.35), rgba(255,215,106,0.12), rgba(255,255,255,0.04));
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      box-shadow:
+        0 0 35px rgba(255,215,106,0.18),
+        inset 0 0 18px rgba(255,255,255,0.15);
+      margin-bottom:28px;
+      transition:0.4s;
+      animation:floatLogo 4s ease-in-out infinite;
+    }
+
+    .logo-card:hover .logo-circle{
+      transform:scale(1.05) rotate(-2deg);
+      box-shadow:
+        0 0 45px rgba(255,215,106,0.28),
+        inset 0 0 20px rgba(255,255,255,0.18);
+    }
+
+    .school-logo{
+      width:170px;
+      height:170px;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+    }
+
+    .logo-card h2{
+      font-size:32px;
+      color:#ffd76a;
+      margin-bottom:12px;
+      letter-spacing:1px;
+    }
+
+    .logo-card p{
+      font-size:16px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+      max-width:320px;
+    }
+
+    .info-card{
+      min-height:560px;
+      padding:42px 42px 36px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .tag{
+      display:inline-block;
+      width:fit-content;
+      padding:8px 16px;
+      border-radius:999px;
+      background:rgba(255,215,106,0.16);
+      border:1px solid rgba(255,215,106,0.28);
+      color:#ffe18f;
+      font-size:13px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      margin-bottom:18px;
+      box-shadow:0 0 18px rgba(255,215,106,0.10);
+    }
+
+    .info-card h1{
+      font-size:54px;
+      line-height:1.1;
+      margin-bottom:20px;
+      color:#ffffff;
+      text-shadow:0 0 18px rgba(255,255,255,0.08);
+    }
+
+    .info-card h1 span{
+      color:#ffd76a;
+    }
+
+    .info-card p{
+      font-size:17px;
+      line-height:1.95;
+      color:rgba(255,255,255,0.90);
+      margin-bottom:16px;
+    }
+
+    .highlight-boxes{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:16px;
+      margin-top:16px;
+    }
+
+    .mini-box{
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:18px;
+      padding:18px 18px;
+      transition:0.35s;
+    }
+
+    .mini-box:hover{
+      transform:scale(1.03);
+      background:rgba(255,215,106,0.10);
+      box-shadow:0 0 18px rgba(255,215,106,0.12);
+    }
+
+    .mini-box h3{
+      font-size:18px;
+      color:#ffd76a;
+      margin-bottom:8px;
+    }
+
+    .mini-box p{
+      font-size:15px;
+      margin:0;
+      line-height:1.7;
+      color:rgba(255,255,255,0.86);
+    }
+
+    @keyframes floatLogo{
+      0%{ transform:translateY(0); }
+      50%{ transform:translateY(-10px); }
+      100%{ transform:translateY(0); }
+    }
+
+    @media (max-width: 992px){
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .logo-card,
+      .info-card{
+        min-height:auto;
+      }
+
+      .info-card h1{
+        font-size:42px;
+      }
+    }
+
+    @media (max-width: 768px){
+      .navbar{
+        padding:0 20px;
+        height:auto;
+        min-height:85px;
+        flex-direction:column;
+        justify-content:center;
+        gap:8px;
+        padding-top:12px;
+        padding-bottom:12px;
+      }
+
+      body{
+        padding-top:130px;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:16px;
+      }
+
+      .hero{
+        width:92%;
+      }
+
+      .info-card{
+        padding:30px 24px;
+      }
+
+      .info-card h1{
+        font-size:34px;
+      }
+
+      .highlight-boxes{
+        grid-template-columns:1fr;
+      }
+
+      .logo-circle{
+        width:210px;
+        height:210px;
+      }
+
+      .school-logo{
+        width:140px;
+        height:140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="logo.png" class="logo-img" alt="School Logo">
+      <div class="logo-text">PHYSICS LAB</div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="Grade 7.html">Grade 7</a></li>
+      <li><a href="Grade 8.html">Grade 8</a></li>
+      <li><a href="Grade9Choose.html">Grade 9</a></li>
+      <li><a href="Exercise.html">Exercise</a></li>
+      <li><a href="video.html">Video</a></li>
+      <li><a href="handout.html">Handout</a></li>
+      <li><a href="PPT .html">PPT</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="School info.html">School Information</a></li>
+      <li><a href="reference.html">References</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="card logo-card">
+      <div class="logo-circle">
+        <img src="logo.png" alt="Santa Laurensia Logo" class="school-logo">
+      </div>
+      <h2>Santa Laurensia School</h2>
+      <p>
+        A place where students grow in knowledge, character, creativity, and global awareness.
+      </p>
+    </div>
+
+    <div class="card info-card">
+      <div class="tag">About the School</div>
+      <h1>Learn, Grow, and <span>Inspire</span></h1>
+
+      <p>
+        This website was created by students of Santa Laurensia School as part of a learning project to share educational content and knowledge.
+      </p>
+
+      <p>
+        Founded in 1994, Santa Laurensia School is a well-known Roman Catholic SPK school located in Tangerang, Indonesia. The school is recognized for its progressive approach to education and its commitment to developing students academically, socially, and morally.
+      </p>
+
+      <p>
+        The school offers a holistic education program from preschool to senior high school. Learning is delivered through a bilingual and trilingual curriculum that helps students develop strong communication skills and global awareness.
+      </p>
+
+      <p>
+        With campuses in Alam Sutera and Suvarna Sutera, the school emphasizes character formation, critical thinking, creativity, and other important 21st-century skills. Students are encouraged to become responsible individuals who are prepared to contribute positively to society and the global community.
+      </p>
+
+      <div class="highlight-boxes">
+        <div class="mini-box">
+          <h3>Founded</h3>
+          <p>Established in 1994 with a strong commitment to quality education and character building.</p>
+        </div>
+        <div class="mini-box">
+          <h3>Curriculum</h3>
+          <p>Bilingual and trilingual learning designed to prepare students for both local and global settings.</p>
+        </div>
+        <div class="mini-box">
+          <h3>Campuses</h3>
+          <p>Located in Alam Sutera and Suvarna Sutera, serving a broad student community.</p>
+        </div>
+        <div class="mini-box">
+          <h3>Vision</h3>
+          <p>To shape responsible, creative, critical, and morally grounded learners for the future.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

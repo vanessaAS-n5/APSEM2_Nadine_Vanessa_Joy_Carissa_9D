@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physics Handouts</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(10,20,40,0.72), rgba(10,20,40,0.82)),
+        url("science.jpg");
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0,170,255,0.14), transparent 18%),
+        radial-gradient(circle at 85% 25%, rgba(255,255,255,0.08), transparent 18%),
+        radial-gradient(circle at 50% 85%, rgba(0,200,255,0.10), transparent 20%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(10px);
+      opacity:0.28;
+      z-index:0;
+      animation:floatOrb 10s ease-in-out infinite;
+    }
+
+    .orb1{
+      width:120px;
+      height:120px;
+      background:#3db8ff;
+      top:120px;
+      left:35px;
+    }
+
+    .orb2{
+      width:160px;
+      height:160px;
+      background:#7fdcff;
+      top:260px;
+      right:55px;
+      animation-delay:2s;
+    }
+
+    .orb3{
+      width:90px;
+      height:90px;
+      background:#9be7ff;
+      bottom:70px;
+      left:100px;
+      animation-delay:4s;
+    }
+
+    @keyframes floatOrb{
+      0%{ transform:translateY(0) translateX(0); }
+      50%{ transform:translateY(-18px) translateX(8px); }
+      100%{ transform:translateY(0) translateX(0); }
+    }
+
+    .navbar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:82px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 50px;
+      background:rgba(0,0,0,0.55);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.10);
+      z-index:1000;
+    }
+
+    .logo-container{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-img{
+      height:56px;
+      width:auto;
+    }
+
+    .logo-text{
+      font-size:24px;
+      font-weight:700;
+      color:#58beff;
+      letter-spacing:1px;
+      text-shadow:0 0 10px rgba(88,190,255,0.35);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:26px;
+      list-style:none;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      position:relative;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#7fdcff;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0%;
+      height:2px;
+      background:#58beff;
+      transition:0.3s;
+      box-shadow:0 0 10px rgba(88,190,255,0.5);
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    .hero{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      width:90%;
+      max-width:1150px;
+      margin:0 auto;
+      padding-top:135px;
+      padding-bottom:40px;
+    }
+
+    .hero-badge{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.14);
+      color:#c8f2ff;
+      font-size:14px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.16);
+    }
+
+    .hero h1{
+      font-size:54px;
+      margin-bottom:14px;
+      color:white;
+      text-shadow:0 0 14px rgba(88,190,255,0.22);
+    }
+
+    .hero p{
+      font-size:18px;
+      color:rgba(255,255,255,0.86);
+      max-width:760px;
+      margin:auto;
+      line-height:1.9;
+    }
+
+    .filter-bar{
+      position:relative;
+      z-index:1;
+      width:90%;
+      max-width:1000px;
+      margin:0 auto 28px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .filter-btn{
+      padding:11px 20px;
+      border:none;
+      border-radius:30px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      color:white;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active{
+      background:linear-gradient(135deg,#3db8ff,#1e90ff);
+      box-shadow:0 0 18px rgba(88,190,255,0.25);
+    }
+
+    .handout-wrapper{
+      position:relative;
+      z-index:1;
+      width:90%;
+      max-width:1250px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:40px;
+      padding-bottom:70px;
+    }
+
+    .handout-card{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.14);
+      padding:30px;
+      border-radius:24px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.30);
+      text-align:center;
+      transition:0.4s;
+      overflow:hidden;
+    }
+
+    .handout-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 24px rgba(88,190,255,0.15), 0 24px 42px rgba(0,0,0,0.32);
+    }
+
+    .handout-card h2{
+      margin-bottom:10px;
+      font-size:32px;
+      color:#a6ebff;
+    }
+
+    .handout-card p{
+      margin-bottom:22px;
+      color:rgba(255,255,255,0.82);
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    .pdf-box{
+      background:rgba(0,0,0,0.20);
+      border-radius:20px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.10);
+    }
+
+    .pdf-box h3{
+      margin-bottom:12px;
+      font-size:18px;
+      color:#d9f8ff;
+    }
+
+    .pdf-box iframe{
+      width:100%;
+      height:650px;
+      border:none;
+      border-radius:16px;
+      background:white;
+    }
+
+    .card-actions{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .open-btn{
+      display:inline-block;
+      padding:11px 20px;
+      border-radius:30px;
+      text-decoration:none;
+      background:linear-gradient(135deg,#3db8ff,#1e90ff);
+      color:white;
+      font-weight:600;
+      transition:0.3s;
+      box-shadow:0 12px 24px rgba(30,144,255,0.18);
+    }
+
+    .open-btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 18px rgba(88,190,255,0.30);
+    }
+
+    .secondary-btn{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.15);
+    }
+
+    .floating-top{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:52px;
+      height:52px;
+      border:none;
+      border-radius:50%;
+      background:linear-gradient(135deg,#3db8ff,#1e90ff);
+      color:white;
+      font-size:22px;
+      cursor:pointer;
+      z-index:999;
+      box-shadow:0 14px 24px rgba(30,144,255,0.22);
+      transition:0.3s;
+    }
+
+    .floating-top:hover{
+      transform:scale(1.08);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(36px);
+      transition:all 0.8s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .hidden-card{
+      display:none;
+    }
+
+    @media (max-width: 900px){
+      .navbar{
+        padding:0 18px;
+        height:auto;
+        min-height:90px;
+        flex-direction:column;
+        justify-content:center;
+        gap:8px;
+        padding-top:12px;
+        padding-bottom:12px;
+      }
+
+      .nav-links{
+        justify-content:center;
+        gap:12px 18px;
+      }
+
+      .hero{
+        padding-top:145px;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+
+      .handout-card{
+        padding:20px;
+      }
+
+      .pdf-box iframe{
+        height:500px;
+      }
+    }
+
+    @media (max-width: 600px){
+      .hero h1{
+        font-size:30px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      .handout-card h2{
+        font-size:24px;
+      }
+
+      .pdf-box iframe{
+        height:380px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="logo.png" class="logo-img" alt="Logo">
+      <div class="logo-text">PHYSICS LAB</div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="Grade 7.html">Grade 7</a></li>
+      <li><a href="Grade 8.html">Grade 8</a></li>
+      <li><a href="Grade9Choose.html">Grade 9</a></li>
+      <li><a href="Exercise.html">Exercise</a></li>
+      <li><a href="video.html">Video</a></li>
+      <li><a href="handout.html">Handout</a></li>
+      <li><a href="PPT .html">PPT</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="School info.html">School Information</a></li>
+      <li><a href="reference.html">References</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero reveal">
+    <div class="hero-badge">Interactive PDF Handouts • Grade 7–9</div>
+    <h1>Physics Handouts</h1>
+    <p>
+      Open and read the handouts for each grade directly on this page. Use the filter buttons
+      to jump quickly to Grade 7, Grade 8, or Grade 9 materials.
+    </p>
+  </section>
+
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" onclick="filterHandouts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterHandouts('g7', this)">Grade 7</button>
+    <button class="filter-btn" onclick="filterHandouts('g8', this)">Grade 8</button>
+    <button class="filter-btn" onclick="filterHandouts('g9', this)">Grade 9</button>
+  </div>
+
+  <div class="handout-wrapper">
+
+    <div class="handout-card reveal" data-grade="g7">
+      <h2>Grade 7 Handout</h2>
+      <p>Review the Grade 7 handout material here.</p>
+
+      <div class="pdf-box">
+        <h3>Grade 7 handout.pdf</h3>
+        <iframe src="Grade 7 handout.pdf"></iframe>
+      </div>
+
+      <div class="card-actions">
+        <a href="Grade 7 handout.pdf" class="open-btn" target="_blank">Open PDF</a>
+        <a href="Grade 7.html" class="open-btn secondary-btn">Open Grade 7</a>
+      </div>
+    </div>
+
+    <div class="handout-card reveal" data-grade="g8">
+      <h2>Grade 8 Handout</h2>
+      <p>Review the Grade 8 handout material here.</p>
+
+      <div class="pdf-box">
+        <h3>Grade 8 handout.pdf</h3>
+        <iframe src="Grade 8 handout.pdf"></iframe>
+      </div>
+
+      <div class="card-actions">
+        <a href="Grade 8 handout.pdf" class="open-btn" target="_blank">Open PDF</a>
+        <a href="Grade 8.html" class="open-btn secondary-btn">Open Grade 8</a>
+      </div>
+    </div>
+
+    <div class="handout-card reveal" data-grade="g9">
+      <h2>Grade 9 Handout</h2>
+      <p>Review the Grade 9 handout material here.</p>
+
+      <div class="pdf-box">
+        <h3>Grade 9 handout.pdf</h3>
+        <iframe src="Grade 9 handout.pdf"></iframe>
+      </div>
+
+      <div class="card-actions">
+        <a href="Grade 9 handout.pdf" class="open-btn" target="_blank">Open PDF</a>
+        <a href="Grade 9.html" class="open-btn secondary-btn">Open Grade 9</a>
+      </div>
+    </div>
+
+    <div class="handout-card reveal" data-grade="g9">
+      <h2>Magnetism Handout</h2>
+      <p>Review the magnetism handout material here.</p>
+
+      <div class="pdf-box">
+        <h3>magnetism.pdf</h3>
+        <iframe src="Magnetism G9 - Semester 2 (1).pdf"></iframe>
+      </div>
+
+      <div class="card-actions">
+        <a href="Magnetism G9 - Semester 2 (1).pdf" class="open-btn" target="_blank">Open PDF</a>
+        <a href="magnet.html" class="open-btn secondary-btn">Open Magnetism</a>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="floating-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <script>
+    function filterHandouts(grade, btn){
+      const cards = document.querySelectorAll(".handout-card");
+      const buttons = document.querySelectorAll(".filter-btn");
+
+      buttons.forEach(button => button.classList.remove("active"));
+      if(btn){
+        btn.classList.add("active");
+      }
+
+      cards.forEach(card => {
+        if(grade === "all" || card.getAttribute("data-grade") === grade){
+          card.classList.remove("hidden-card");
+        } else {
+          card.classList.add("hidden-card");
+        }
+      });
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll(){
+      reveals.forEach((el) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if(elementTop < windowHeight - revealPoint){
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+  </script>
+
+</body>
+</html>
